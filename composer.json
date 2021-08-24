@@ -1,0 +1,24 @@
+{
+    "name": "lumite-studios/livewire-repeatable",
+    "description": "A repeatable livewire component.",
+    "type": "package",
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^8.55",
+        "livewire/livewire": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "LumiteStudios\\LivewireRepeatable\\": "src"
+        }
+    },
+	"extra": {
+		"laravel": {
+			"providers": [
+				"LumiteStudios\\LivewireRepeatable\\ServiceProvider"
+			]
+		}
+	},
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
