@@ -4,17 +4,28 @@ namespace LumiteStudios\LivewireRepeatable;
 use Livewire\Component;
 
 /**
- * Class RepeatableViewComponent
+ * Class RepeatableComponent
  * @package LumiteStudios\LivewireRepeatable
  *
- * @property string $name
+ * @property array $items
+ * @property string $view
+ * @property string $theme
+ * @property string $addButtonClasses
+ * @property string $addButtonContainerClasses
+ * @property string $noItemsClasses
+ * @property string $noItemsText
+ * @property string $removeButtonClasses
+ * @property string $itemContainerClasses
+ * @property string $moveButtonContainerClasses
+ * @property string $moveUpButtonClasses
+ * @property string $moveDownButtonClasses
  */
 class RepeatableComponent extends Component
 {
 	public array $items = [];
 	public string $view;
 
-	public ?string $theme;
+	public string $theme;
 	public string $addButtonClasses;
 	public string $addButtonContainerClasses;
 	public string $noItemsClasses;
@@ -32,7 +43,7 @@ class RepeatableComponent extends Component
 	 */
     public function mount(string $view,
 						  array $items = [],
-						  ?string $theme = null,
+						  string $theme = '',
 						  string $addButtonClasses = '',
 						  string $addButtonContainerClasses = '',
 						  string $noItemsClasses = '',
@@ -46,11 +57,11 @@ class RepeatableComponent extends Component
         $this->view = $view;
 
         $this->items = collect($items)->map(function($item, $key) {
-			$item['id'] = 'item-'.$key;
+			$item['id'] = array_key_exists('id', $item) ? $item['id'] : 'item-'.$key;
 			return $item;
 		})->toArray();
 
-        $this->theme = in_array($theme, $this->getThemes()) ? $theme : null;
+        $this->theme = in_array($theme, $this->getThemes()) ? $theme : '';
         $this->addButtonClasses = $addButtonClasses;
         $this->addButtonContainerClasses = $addButtonContainerClasses;
         $this->noItemsClasses = $noItemsClasses;
@@ -115,11 +126,16 @@ class RepeatableComponent extends Component
 		$this->moveElement($index, $index+1);
 	}
 
+	/**
+	 * Get the add button container class.
+	 *
+	 * @return string
+	 */
 	public function getAddButtonContainerClassProperty(): string
 	{
 		switch($this->theme) {
 			case 'tailwind': {
-				return '';
+				return 'text-right';
 				break;
 			}
 			default: {
@@ -128,11 +144,16 @@ class RepeatableComponent extends Component
 		}
 	}
 
+	/**
+	 * Get the add button class.
+	 *
+	 * @return string
+	 */
 	public function getAddButtonClassProperty(): string
 	{
 		switch($this->theme) {
 			case 'tailwind': {
-				return '';
+				return 'bg-blue-600 p-1 rounded text-white';
 				break;
 			}
 			default: {
@@ -141,6 +162,11 @@ class RepeatableComponent extends Component
 		}
 	}
 
+	/**
+	 * Get the no items class.
+	 *
+	 * @return string
+	 */
 	public function getNoItemsClassProperty(): string
 	{
 		switch($this->theme) {
@@ -154,20 +180,12 @@ class RepeatableComponent extends Component
 		}
 	}
 
-	public function getRemoveButtonClassProperty(): string
-	{
-		switch($this->theme) {
-			case 'tailwind': {
-				return '';
-				break;
-			}
-			default: {
-				return $this->removeButtonClasses;
-			}
-		}
-	}
-
-	public function getItemContainerClass(): string
+	/**
+	 * Get the item container class.
+	 *
+	 * @return string
+	 */
+	public function getItemContainerClassProperty(): string
 	{
 		switch($this->theme) {
 			case 'tailwind': {
@@ -180,7 +198,30 @@ class RepeatableComponent extends Component
 		}
 	}
 
-	public function getMoveButtonContainerClass(): string
+	/**
+	 * Get the remove button class.
+	 *
+	 * @return string
+	 */
+	public function getRemoveButtonClassProperty(): string
+	{
+		switch($this->theme) {
+			case 'tailwind': {
+				return 'bg-red-600 p-1 rounded';
+				break;
+			}
+			default: {
+				return $this->removeButtonClasses;
+			}
+		}
+	}
+
+	/**
+	 * Get the move button container class.
+	 *
+	 * @return string
+	 */
+	public function getMoveButtonContainerClassProperty(): string
 	{
 		switch($this->theme) {
 			case 'tailwind': {
@@ -193,11 +234,16 @@ class RepeatableComponent extends Component
 		}
 	}
 
+	/**
+	 * Get the move up button class.
+	 *
+	 * @return string
+	 */
 	public function getMoveUpButtonClassProperty(): string
 	{
 		switch($this->theme) {
 			case 'tailwind': {
-				return '';
+				return 'bg-blue-600 p-1 rounded rounded-b-none';
 				break;
 			}
 			default: {
@@ -206,11 +252,16 @@ class RepeatableComponent extends Component
 		}
 	}
 
+	/**
+	 * Get the move down button class.
+	 *
+	 * @return string
+	 */
 	public function getMoveDownButtonClassProperty(): string
 	{
 		switch($this->theme) {
 			case 'tailwind': {
-				return '';
+				return 'bg-blue-600 p-1 rounded rounded-t-none';
 				break;
 			}
 			default: {

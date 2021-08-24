@@ -13,7 +13,7 @@ class ServiceProvider extends BaseServiceProvider
 	 */
 	public function boot()
 	{
-		$this->loadViewsFrom(__DIR__.'/../../resources/views', 'livewire-repeatable');
+		$this->loadViewsFrom(__DIR__.'/../resources/views', 'livewire-repeatable');
 		Livewire::component('repeatable-component', RepeatableComponent::class);
 		Livewire::component('repeatable-view-component', RepeatableViewComponent::class);
 	}
