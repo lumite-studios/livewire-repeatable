@@ -2,6 +2,7 @@
 
 ![PHP ^8.0](https://img.shields.io/badge/PHP-%5E8.0-787CB5?style=for-the-badge&logo=php)
 ![Laravel ^8.52](https://img.shields.io/badge/Laravel-%5E8.52-fb503b?style=for-the-badge&logo=laravel)
+![Livewire ^2.5](https://img.shields.io/badge/Livewire-%5E2.5-lightgrey?style=for-the-badge)
 
 ## Installation
 `composer require lumite-studios/livewire-repeatable`
